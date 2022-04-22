@@ -2640,6 +2640,16 @@ preact@^10.7.1:
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.7.1.tgz#bdd2b2dce91a5842c3b9b34dfe050e5401068c9e"
   integrity sha512-MufnRFz39aIhs9AMFisonjzTud1PK1bY+jcJLo6m2T9Uh8AqjD77w11eAAawmjUogoGOnipECq7e/1RClIKsxg==
 
+prettier-config-rschristian@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/prettier-config-rschristian/-/prettier-config-rschristian-0.1.1.tgz#59efad3002a0a915c28019ed7ea2b2c8f875115e"
+  integrity sha512-PRs3vZn+1PTGTTtDfdDZdrhzLhQCu4Qe5HxWo1R3Ui2R8X2PX5rKEg7NOfZbvjla0686+nYocV3mDOhMz2D4WQ==
+
+prettier@^2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.6.2.tgz#e26d71a18a74c3d0f0597f55f01fb6c06c206032"
+  integrity sha512-PkUpF+qoXTqhOeWL9fu7As8LXsIUZ1WYaJiY/a7McAQzxjk82OF0tibkFXVCDImZtWxbvojFjerkiLb0/q8mew==
+
 pretty-bytes@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-3.0.1.tgz#27d0008d778063a0b4811bb35c79f1bd5d5fbccf"

@@ -13,14 +13,14 @@ export function withTwind(
     const hydrate: typeof hydrate$ = async (jsx, parent) => {
         if (hydrateWithTwind) {
             const { install: install$ } = await import('twind');
-            install$(await config as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
+            install$((await config) as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
         }
         hydrate$(jsx, parent);
-    }
+    };
 
     const prerender = async (data: unknown) => {
         const { install, extract } = twind || (twind = await import('twind'));
-        const tw = install(await config as TwindUserConfig, true);
+        const tw = install((await config) as TwindUserConfig, true);
 
         const result = await prerender$(prerenderCallback(data));
         const { html, css } = extract(result.html, tw);
