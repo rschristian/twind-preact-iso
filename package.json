@@ -1,0 +1,38 @@
+{
+  "name": "@rschristian/twind-wmr",
+  "version": "0.0.1",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": "./dist/twind-wmr.js",
+  "license": "MIT",
+  "description": "(Slightly) opinionated Twind v1 integration for WMR",
+  "repository": "https://github.com/rschristian/twind-wmr",
+  "keywords": [
+    "twind",
+    "wmr"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "microbundle build -f modern --no-sourcemap --target node"
+  },
+  "peerDependencies": {
+    "preact": ">10",
+    "preact-iso": ">2.0.0",
+    "preact-render-to-string": ">5.0.0",
+    "twind": ">1.0.0-next.37"
+  },
+  "devDependencies": {
+    "microbundle": "^0.14.2",
+    "preact": "^10.7.1",
+    "preact-iso": "^2.3.0",
+    "preact-render-to-string": "^5.1.21",
+    "twind": "^1.0.0-next.37",
+    "typescript": "^4.6.3"
+  }
+}
