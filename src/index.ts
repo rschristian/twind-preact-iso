@@ -24,7 +24,11 @@ export function withTwind(
         const tw = install((userConfig || (userConfig = await config)) as TwindUserConfig, true);
 
         const result = await prerender$(prerenderCallback(data));
-        const { html, css } = extract(result.html, tw);
+        let { html, css } = extract(result.html, tw);
+
+        if (!hydrateWithTwind) {
+            css = css.replace(/\/\*[^\*]*\*\//g, '');
+        }
 
         return Object.assign(
             result,
