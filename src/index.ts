@@ -9,6 +9,7 @@ export function withTwind(
     hydrateWithTwind: boolean = import.meta.env.NODE_ENV !== 'production',
 ) {
     let twind: typeof import('twind');
+    let userConfig: TwindConfig | TwindUserConfig;
 
     const hydrate: typeof hydrate$ = async (jsx, parent) => {
         if (hydrateWithTwind) {
@@ -20,7 +21,7 @@ export function withTwind(
 
     const prerender = async (data: unknown) => {
         const { install, extract } = twind || (twind = await import('twind'));
-        const tw = install((await config) as TwindUserConfig, true);
+        const tw = install((userConfig || (userConfig = await config)) as TwindUserConfig, true);
 
         const result = await prerender$(prerenderCallback(data));
         const { html, css } = extract(result.html, tw);
