@@ -25,19 +25,23 @@ export function withTwind(
         const result = await prerender$(prerenderCallback(data));
         const { html, css } = extract(result.html, tw);
 
-        return Object.assign(result, html, {
-            head: {
-                elements: new Set([
-                    {
-                        type: 'style',
-                        props: {
-                            'data-twind': '',
-                            children: css,
+        return Object.assign(
+            result,
+            { html },
+            {
+                head: {
+                    elements: new Set([
+                        {
+                            type: 'style',
+                            props: {
+                                'data-twind': '',
+                                children: css,
+                            },
                         },
-                    },
-                ]),
+                    ]),
+                },
             },
-        });
+        );
     };
 
     return {
