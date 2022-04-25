@@ -24,10 +24,10 @@
     "format": "prettier --write --ignore-path .gitignore ."
   },
   "peerDependencies": {
-    "preact": ">10",
-    "preact-iso": ">2.0.0",
-    "preact-render-to-string": ">5.0.0",
-    "twind": ">1.0.0-next.37"
+    "preact": "^10.0.0",
+    "preact-iso": "^2.0.0",
+    "preact-render-to-string": "^5.0.0",
+    "twind": "^1.0.0-next.37"
   },
   "devDependencies": {
     "microbundle": "^0.14.2",
