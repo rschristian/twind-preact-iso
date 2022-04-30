@@ -13,6 +13,8 @@
 
 `@rschristian/twind-wmr` is a (slightly) opinionated integration for [Twind](https://twind.dev) v1 with [WMR](https://wmr.dev). Twind's own WMR integration is built for v0 and requires you to do a bit more work if you don't want to hydrate with Twind in production.
 
+> Warning: Due to some limitations with WMR at the moment, there's no way to not drag in the config file while using the `hydrate` function from this library, regardless of whether or not you're hydrating with Twind.
+
 ## Install
 
 ```
