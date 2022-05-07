@@ -13,8 +13,8 @@ export function withTwind(
 
     const hydrate: typeof hydrate$ = async (jsx, parent) => {
         if (hydrateWithTwind) {
-            const { install: install$ } = await import('twind');
-            install$((await config) as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
+            const { install } = await import('twind');
+            install((await config) as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
         }
         hydrate$(jsx, parent);
     };
