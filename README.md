@@ -13,8 +13,6 @@
 
 `@rschristian/twind-wmr` is a (slightly) opinionated integration for [Twind](https://twind.dev) v1 with [WMR](https://wmr.dev). Twind's own WMR integration is built for v0 and requires you to do a bit more work if you don't want to hydrate with Twind in production.
 
-> Warning: Due to some limitations with WMR at the moment, there's no way to not drag in the config file while using the `hydrate` function from this library, regardless of whether or not you're hydrating with Twind.
-
 ## Install
 
 ```
@@ -58,12 +56,12 @@ import {
  }
 
 +const { hydrate, prerender } = withTwind(
-+    import('./twind.config.js').then(({ twindConfig }) => twindConfig),
++    () => import('./twind.config').then(({ twindConfig }) => twindConfig),
 +    (data) => <App {...data} />,
-+    import.meta.env.NODE_ENV !== 'production',
++    import.meta.env.NODE_ENV != 'production',
 +);
 
- hydrate(<App />);
+hydrate(<App />);
 
 -export async function prerender(data) {
 -    return await ssr(<App {...data} />);
@@ -75,9 +73,9 @@ import {
 
 ### config
 
-Type: `Promise<TwindConfig | TwindUserConfig>`<br/>
+Type: `() => Promise<TwindConfig | TwindUserConfig>`<br/>
 
-Provide your Twind config by dynamic import. While this is a tad cumbersome, it keeps your config out of the client-side bundle except for when you want client-side prod Twind hydration.
+Provide your Twind config via a callback dynamic import. While this is a tad cumbersome, it's the only way to ensure you're not pulling in Twind when you have hydration disabled.
 
 ### prerenderCallback
 
@@ -92,11 +90,11 @@ Default: `import.meta.env.NODE_ENV !== 'production'`
 
 Whether Twind should be allowed to run client-side, effectively. By default it's disabled in prod.
 
-If you're using grouped classes, I suggest you look at [wmr-plugin-tailwind-grouping](https://github.com/rschristian/tailwind-grouping) to expand the groups in your JSX, else hydration without Twind will break your prerendered styles as it'll regroup the expanded classes.
+If you're using grouped classes, I suggest you look at [wmr-plugin-tailwind-grouping](https://github.com/rschristian/tailwind-grouping) to expand the groups in your JS bundles. Without Twind to translate grouped classes client-side, hydrating with them will result in broken styling.
 
 ## Acknowledgements
 
-This is massively based upon the excellant [`@twind/wmr`](https://github.com/tw-in-js/use-twind-with/blob/main/packages/wmr) by [github.com/sastan](https://github.com/sastan). I was wanting to extract out my config (as I've written this dozens of times now) and wanted to support Twind v1, which the official Twind integration hasn't been updated for yet (as v1 is still very much in beta at the time of writing this).
+This is massively based upon the excellent [`@twind/wmr`](https://github.com/tw-in-js/use-twind-with/blob/main/packages/wmr) by [github.com/sastan](https://github.com/sastan). I was wanting to extract out my config (as I've written this dozens of times now) and wanted to support Twind v1, which the official Twind integration hasn't been updated for yet (as v1 is still in beta at the time of writing this).
 
 ## License
 

@@ -4,7 +4,7 @@ import type { TwindConfig, TwindUserConfig } from 'twind';
 import { hydrate as hydrate$, prerender as prerender$ } from 'preact-iso';
 
 export function withTwind(
-    config: Promise<TwindConfig | TwindUserConfig>,
+    config: () => Promise<TwindConfig | TwindUserConfig>,
     prerenderCallback: (data: unknown) => VNode,
     hydrateWithTwind: boolean = import.meta.env.NODE_ENV !== 'production',
 ) {
@@ -14,14 +14,14 @@ export function withTwind(
     const hydrate: typeof hydrate$ = async (jsx, parent) => {
         if (hydrateWithTwind) {
             const { install } = await import('twind');
-            install((await config) as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
+            install(await config() as TwindUserConfig, import.meta.env.NODE_ENV === 'production');
         }
         hydrate$(jsx, parent);
     };
 
     const prerender = async (data: unknown) => {
         const { install, extract } = twind || (twind = await import('twind'));
-        const tw = install((userConfig || (userConfig = await config)) as TwindUserConfig, true);
+        const tw = install((userConfig || (userConfig = await config())) as TwindUserConfig, true);
 
         const result = await prerender$(prerenderCallback(data));
         let { html, css } = extract(result.html, tw);
