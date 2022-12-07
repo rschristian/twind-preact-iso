@@ -56,7 +56,7 @@ import {
  }
 
 +const { hydrate, prerender } = withTwind(
-+    () => import('./twind.config').then(({ twindConfig }) => twindConfig),
++    () => import('./twind.config'),
 +    (data) => <App {...data} />,
 +    import.meta.env.NODE_ENV != 'production',
 +);
@@ -73,9 +73,9 @@ hydrate(<App />);
 
 ### config
 
-Type: `() => Promise<TwindConfig | TwindUserConfig>`<br/>
+Type: `() => Promise<{ twindConfig: TwindConfig | TwindUserConfig }>`<br/>
 
-Provide your Twind config via a callback dynamic import. While this is a tad cumbersome, it's the only way to ensure you're not pulling in Twind when you have hydration disabled.
+Provide your Twind config via a callback function that returns a Promise containing your config upon the `twindConfig` key. While this is a tad cumbersome, it's done to ensure that no pieces of Twind are dragged into your client-side bundles when you choose not to hydrate with it.
 
 ### prerenderCallback
 
@@ -94,7 +94,7 @@ If you're using grouped classes, I suggest you look at [wmr-plugin-tailwind-grou
 
 ## Acknowledgements
 
-This is massively based upon the excellent [`@twind/wmr`](https://github.com/tw-in-js/use-twind-with/blob/main/packages/wmr) by [github.com/sastan](https://github.com/sastan). I was wanting to extract out my config (as I've written this dozens of times now) and wanted to support Twind v1, which the official Twind integration hasn't been updated for yet (as v1 is still in beta at the time of writing this).
+This is massively based upon the excellent [`@twind/wmr`](https://github.com/tw-in-js/use-twind-with/blob/main/packages/wmr) by [github.com/sastan](https://github.com/sastan). I was wanting to extract out my config (as I've written this dozens of times now) and wanted to support Twind v1, which the official Twind integration hasn't been updated for.
 
 ## License
 
