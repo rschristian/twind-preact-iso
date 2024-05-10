@@ -1,15 +1,12 @@
 import { hydrate as isoHydrate, prerender as isoPrerender } from 'preact-iso';
 
 /**
- * @typedef {import('preact').VNode} VNode
  * @typedef {import('@twind/core').TwindConfig} TwindConfig
  * @typedef {import('@twind/core').TwindUserConfig} TwindUserConfig
  */
 
 /**
- * @param {() => Promise<{ twindConfig: TwindConfig | TwindUserConfig}>} config
- * @param {(data: unknown) => VNode} prerenderCallback
- * @param {boolean} hydrateWithTwind
+ * @type {import('./twind-iso').withTwind}
  */
 export function withTwind(
     config,

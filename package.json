@@ -1,19 +1,20 @@
 {
-  "name": "@rschristian/twind-wmr",
+  "name": "@rschristian/twind-preact-iso",
   "version": "0.3.0",
   "type": "module",
-  "types": "./src/twind-wmr.d.ts",
-  "exports": "./src/twind-wmr.js",
+  "types": "./src/twind-iso.d.ts",
+  "exports": "./src/twind-iso.js",
   "license": "MIT",
-  "description": "(Slightly) opinionated Twind v1 integration for WMR",
-  "repository": "https://github.com/rschristian/twind-wmr",
+  "description": "(Slightly) opinionated twind v1 integration for preact-iso",
+  "repository": "https://github.com/rschristian/twind-preact-iso",
   "keywords": [
     "twind",
-    "wmr"
+    "preact",
+    "preact-iso"
   ],
   "files": [
-    "src/twind-wmr.js",
-    "src/twind-wmr.d.ts",
+    "src/twind-iso.js",
+    "src/twind-iso.d.ts",
     "LICENSE",
     "package.json",
     "README.md"
