@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "allowJs": true,
-    "checkJs": true
+    "checkJs": true,
+    "strict": true
   }
 }
