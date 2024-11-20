@@ -21,22 +21,29 @@ export function withTwind(
 
     /**
      * @param {import('preact').ComponentChild} jsx
-     * @param {import('preact').ContainerNode} parent
+     * @param {import('preact').ContainerNode} [parent]
      */
     const render = async (jsx, parent) => {
+        if (typeof window === 'undefined') return;
+
         const { install } = await import('@twind/core');
         install(
             /** @type {TwindConfig} */ ((await config()).twindConfig),
             import.meta.env.NODE_ENV === 'production',
         );
+
+        const isodata = document.querySelector('script[type=isodata]');
+        parent = parent || (isodata && isodata.parentNode) || document.body;
         preactRender(jsx, parent);
     }
 
     /**
      * @param {import('preact').ComponentChild} jsx
-     * @param {import('preact').ContainerNode} parent
+     * @param {import('preact').ContainerNode} [parent]
      */
     const hydrate = async (jsx, parent) => {
+        if (typeof window === 'undefined') return;
+
         if (hydrateWithTwind) {
             const { install } = await import('@twind/core');
             install(
@@ -44,6 +51,7 @@ export function withTwind(
                 import.meta.env.NODE_ENV === 'production',
             );
         }
+
         isoHydrate(jsx, parent);
     };
 

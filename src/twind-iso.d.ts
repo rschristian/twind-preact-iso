@@ -2,7 +2,7 @@ import type { ComponentChild, ContainerNode } from 'preact';
 import type { PrerenderResult } from 'preact-iso/prerender';
 import type { TwindConfig, TwindUserConfig } from '@twind/core';
 
-type RenderType = (jsx: ComponentChild, parent: ContainerNode) => void;
+type RenderType = (jsx: ComponentChild, parent?: ContainerNode) => void;
 
 export function withTwind(
     config: () => Promise<{
