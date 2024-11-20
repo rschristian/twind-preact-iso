@@ -1,15 +1,17 @@
-import { hydrate } from 'preact-iso';
+import type { ComponentChild, ContainerNode } from 'preact';
 import type { PrerenderResult } from 'preact-iso/prerender';
-import type { VNode } from 'preact';
 import type { TwindConfig, TwindUserConfig } from '@twind/core';
+
+type RenderType = (jsx: ComponentChild, parent: ContainerNode) => void;
 
 export function withTwind(
     config: () => Promise<{
         twindConfig: TwindConfig | TwindUserConfig;
     }>,
-    prerenderCallback: (data: unknown) => VNode,
+    prerenderCallback: (data: unknown) => ComponentChild,
     hydrateWithTwind?: boolean,
 ): {
-    hydrate: typeof hydrate;
+    render: RenderType;
+    hydrate: RenderType;
     prerender: (data: unknown) => Promise<PrerenderResult>;
 };

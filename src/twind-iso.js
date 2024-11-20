@@ -1,3 +1,4 @@
+import { render as preactRender } from 'preact';
 import { hydrate as isoHydrate, prerender as isoPrerender } from 'preact-iso';
 
 /**
@@ -18,7 +19,23 @@ export function withTwind(
     /** @type {TwindConfig | TwindUserConfig} */
     let userConfig;
 
-    /** @type {isoHydrate} */
+    /**
+     * @param {import('preact').ComponentChild} jsx
+     * @param {import('preact').ContainerNode} parent
+     */
+    const render = async (jsx, parent) => {
+        const { install } = await import('@twind/core');
+        install(
+            /** @type {TwindConfig} */ ((await config()).twindConfig),
+            import.meta.env.NODE_ENV === 'production',
+        );
+        preactRender(jsx, parent);
+    }
+
+    /**
+     * @param {import('preact').ComponentChild} jsx
+     * @param {import('preact').ContainerNode} parent
+     */
     const hydrate = async (jsx, parent) => {
         if (hydrateWithTwind) {
             const { install } = await import('@twind/core');
@@ -30,7 +47,9 @@ export function withTwind(
         isoHydrate(jsx, parent);
     };
 
-    /** @param {unknown} data */
+    /**
+     * @param {unknown} data
+     */
     const prerender = async (data) => {
         const { install, extract } = twind || (twind = await import('@twind/core'));
         const tw = install(
@@ -65,6 +84,7 @@ export function withTwind(
     };
 
     return {
+        render,
         hydrate,
         prerender,
     };

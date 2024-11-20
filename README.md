@@ -49,13 +49,15 @@ The following diff is a basic example taken from the [`create-preact`](https://g
  	);
  }
 
-+const { hydrate, prerender } = withTwind(
++const { render, hydrate, prerender } = withTwind(
 +    () => import('./twind.config'),
 +    (data) => <App {...data} />,
 +);
 
  if (typeof window !== 'undefined') {
 	hydrate(<App />, document.getElementById('app'));
+    // Alternatively, ...
+    // render(<App />, document.getElementById('app'));
  }
 
 -export async function prerender(data) {
