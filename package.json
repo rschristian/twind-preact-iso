@@ -6,7 +6,10 @@
   "exports": "./src/twind-iso.js",
   "license": "MIT",
   "description": "(Slightly) opinionated twind v1 integration for preact-iso",
-  "repository": "https://github.com/rschristian/twind-preact-iso",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rschristian/twind-preact-iso.git"
+  },
   "keywords": [
     "twind",
     "preact",
