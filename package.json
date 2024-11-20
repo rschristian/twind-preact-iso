@@ -1,6 +1,6 @@
 {
   "name": "@rschristian/twind-preact-iso",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "type": "module",
   "types": "./src/twind-iso.d.ts",
   "exports": "./src/twind-iso.js",
