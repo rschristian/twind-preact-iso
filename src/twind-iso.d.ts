@@ -1,14 +1,14 @@
-import type { ComponentChild, ContainerNode } from 'preact';
+import type { ComponentChild, ContainerNode, VNode } from 'preact';
 import type { PrerenderResult } from 'preact-iso/prerender';
-import type { TwindConfig, TwindUserConfig } from '@twind/core';
+import type { defineConfig } from '@twind/core';
 
 type RenderType = (jsx: ComponentChild, parent?: ContainerNode) => void;
 
+export type TwindConfig = ReturnType<typeof defineConfig>;
+
 export function withTwind(
-    config: () => Promise<{
-        twindConfig: TwindConfig | TwindUserConfig;
-    }>,
-    prerenderCallback: (data: unknown) => ComponentChild,
+    config: (() => Promise<{ twindConfig: TwindConfig }>),
+    prerenderCallback: (data: unknown) => VNode<{}>,
     hydrateWithTwind?: boolean,
 ): {
     render: RenderType;

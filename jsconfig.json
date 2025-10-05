@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2024",
-    "module": "ESNext",
-    "moduleResolution": "node16",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noEmit": true,
     "allowJs": true,
     "checkJs": true,

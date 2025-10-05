@@ -2,21 +2,20 @@ import { render as preactRender } from 'preact';
 import { hydrate as isoHydrate, prerender as isoPrerender } from 'preact-iso';
 
 /**
- * @typedef {import('@twind/core').TwindConfig} TwindConfig
- * @typedef {import('@twind/core').TwindUserConfig} TwindUserConfig
+ * @typedef {import('./twind-iso.d.ts').TwindConfig} TwindConfig
  */
 
 /**
- * @type {import('./twind-iso').withTwind}
+ * @type {import('./twind-iso.d.ts').withTwind}
  */
 export function withTwind(
     config,
     prerenderCallback,
     hydrateWithTwind = import.meta.env.NODE_ENV !== 'production',
 ) {
-    /** @type {import('@twind/core')} */
+    /** @type {import('@twind/core') | undefined} */
     let twind;
-    /** @type {TwindConfig | TwindUserConfig} */
+    /** @type {TwindConfig | undefined} */
     let userConfig;
 
     /**
@@ -28,7 +27,7 @@ export function withTwind(
 
         const { install } = await import('@twind/core');
         install(
-            /** @type {TwindConfig} */ ((await config()).twindConfig),
+            (await config()).twindConfig,
             import.meta.env.NODE_ENV === 'production',
         );
 
@@ -47,7 +46,7 @@ export function withTwind(
         if (hydrateWithTwind) {
             const { install } = await import('@twind/core');
             install(
-                /** @type {TwindConfig} */ ((await config()).twindConfig),
+                (await config()).twindConfig,
                 import.meta.env.NODE_ENV === 'production',
             );
         }
@@ -61,7 +60,7 @@ export function withTwind(
     const prerender = async (data) => {
         const { install, extract } = twind || (twind = await import('@twind/core'));
         const tw = install(
-            /** @type {TwindConfig} */ (userConfig || (userConfig = (await config()).twindConfig)),
+            userConfig || (userConfig = (await config()).twindConfig),
             true,
         );
 
