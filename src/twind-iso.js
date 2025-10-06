@@ -14,11 +14,6 @@ export function withTwind(
     prerenderCallback,
     hydrateWithTwind = import.meta.env.NODE_ENV !== 'production',
 ) {
-    /** @type {import('@twind/core') | undefined} */
-    let twind;
-    /** @type {TwindConfig | undefined} */
-    let userConfig;
-
     /**
      * @param {import('preact').ComponentChild} jsx
      * @param {import('preact').ContainerNode} [parent]
@@ -59,9 +54,9 @@ export function withTwind(
      * @param {unknown} data
      */
     const prerender = async (data) => {
-        const { install, extract } = twind || (twind = await import('@twind/core'));
+        const { install, extract } = await import('@twind/core');
         const tw = install(
-            userConfig || (userConfig = await unwrapConfig(config)),
+            await unwrapConfig(config),
             true,
         );
 
