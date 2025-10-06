@@ -8,9 +8,19 @@ export type TwindConfig = ReturnType<typeof defineConfig>;
 export type UserTwindConfig = TwindConfig | (() => Promise<{ twindConfig: TwindConfig }>);
 
 export function withTwind(
-    config: UserTwindConfig,
+    config: (() => Promise<{ twindConfig: TwindConfig }>),
     prerenderCallback: (data: unknown) => VNode<{}>,
-    hydrateWithTwind?: boolean,
+    hydrateWithTwind?: false | never,
+): {
+    render: RenderType;
+    hydrate: RenderType;
+    prerender: (data: unknown) => Promise<PrerenderResult>;
+};
+
+export function withTwind(
+    config: TwindConfig,
+    prerenderCallback: (data: unknown) => VNode<{}>,
+    hydrateWithTwind: true,
 ): {
     render: RenderType;
     hydrate: RenderType;
