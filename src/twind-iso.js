@@ -3,6 +3,7 @@ import { hydrate as isoHydrate, prerender as isoPrerender } from 'preact-iso';
 
 /**
  * @typedef {import('./twind-iso.d.ts').TwindConfig} TwindConfig
+ * @typedef {import('./twind-iso.d.ts').UserTwindConfig} UserTwindConfig
  */
 
 /**
@@ -27,7 +28,7 @@ export function withTwind(
 
         const { install } = await import('@twind/core');
         install(
-            (await config()).twindConfig,
+            await unwrapConfig(config),
             import.meta.env.NODE_ENV === 'production',
         );
 
@@ -46,7 +47,7 @@ export function withTwind(
         if (hydrateWithTwind) {
             const { install } = await import('@twind/core');
             install(
-                (await config()).twindConfig,
+                await unwrapConfig(config),
                 import.meta.env.NODE_ENV === 'production',
             );
         }
@@ -60,7 +61,7 @@ export function withTwind(
     const prerender = async (data) => {
         const { install, extract } = twind || (twind = await import('@twind/core'));
         const tw = install(
-            userConfig || (userConfig = (await config()).twindConfig),
+            userConfig || (userConfig = await unwrapConfig(config)),
             true,
         );
 
@@ -96,3 +97,14 @@ export function withTwind(
         prerender,
     };
 }
+
+/**
+ * @param {UserTwindConfig} config
+ * @returns {Promise<TwindConfig>}
+ */
+async function unwrapConfig(config) {
+    if (typeof config === 'function') {
+        return (await config()).twindConfig;
+    }
+    return config;
+};

@@ -5,9 +5,10 @@ import type { defineConfig } from '@twind/core';
 type RenderType = (jsx: ComponentChild, parent?: ContainerNode) => void;
 
 export type TwindConfig = ReturnType<typeof defineConfig>;
+export type UserTwindConfig = TwindConfig | (() => Promise<{ twindConfig: TwindConfig }>);
 
 export function withTwind(
-    config: (() => Promise<{ twindConfig: TwindConfig }>),
+    config: UserTwindConfig,
     prerenderCallback: (data: unknown) => VNode<{}>,
     hydrateWithTwind?: boolean,
 ): {
